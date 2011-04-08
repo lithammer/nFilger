@@ -190,10 +190,10 @@ addon.SpellList = {
 	['WARRIOR'] = {
 		{
 			Name = 'P_PROC_ICON',
-			Direction = 'LEFT',
+			Direction = 'DOWN',
 			Interval = 4,
 			Mode = 'ICON',
-			setPoint = { 'RIGHT', UIParent, 'CENTER', -160, -20 },
+			setPoint = { 'LEFT', UIParent, 'CENTER', 160, -50 },
 
 			-- Sudden Death
 			{ spellID = 52437, size = 40, unitId = 'player', caster = 'player', filter = 'BUFF' },
@@ -210,10 +210,10 @@ addon.SpellList = {
 		},
 		{
 			Name = 'T_DEBUFF_ICON',
-			Direction = 'RIGHT',
+			Direction = 'DOWN',
 			Interval = 4,
 			Mode = 'ICON',
-			setPoint = { 'LEFT', UIParent, 'CENTER', 160, -20 },
+			setPoint = { 'RIGHT', UIParent, 'CENTER', -160, -50 },
 
 			-- Hamstring
 			{ spellID = 1715, size = 40, unitId = 'target', caster = 'all', filter = 'DEBUFF' },
@@ -466,7 +466,7 @@ addon.SpellList = {
 			setPoint = { 'LEFT', UIParent, 'CENTER', 150, 50 },
 
 			-- Improved Soul Fire
-			{ spellID = 85114, size = 40, unitId = 'player', caster = 'player', filter = 'BUFF' },
+			{ spellID = 85383, size = 40, unitId = 'player', caster = 'player', filter = 'BUFF' },
 			-- Molten Core
 --			{ spellID = 47383, size = 40, unitId = 'player', caster = 'player', filter = 'BUFF' },
 			-- Decimation
