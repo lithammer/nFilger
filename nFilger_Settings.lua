@@ -457,6 +457,8 @@ addon.SpellList = {
 			{ spellID = 47383, size = 40, unitId = 'player', caster = 'player', filter = 'BUFF' },
 			-- Decimation
 			{ spellID = 63158, size = 40, unitId = 'player', caster = 'player', filter = 'BUFF' },
+			-- Fel spark, T11 4-set bonus
+			{ spellID = 89937, size = 40, unitId = 'player', caster = 'player', filter = 'BUFF' },
 		},
 		{
 			Name = 'P_BUFF_ICON',
