@@ -469,6 +469,8 @@ addon.SpellList = {
 
 			-- Improved Soul Fire
 			{ spellID = 85383, size = 40, unitId = 'player', caster = 'player', filter = 'BUFF' },
+			-- Empowered Imp
+			{ spellID = 47221, size = 40, unitId = 'player', caster = 'player', filter = 'BUFF' },
 			-- Molten Core
 --			{ spellID = 47383, size = 40, unitId = 'player', caster = 'player', filter = 'BUFF' },
 			-- Decimation
