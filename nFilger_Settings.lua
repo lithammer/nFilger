@@ -503,10 +503,6 @@ addon.SpellList = {
 			Mode = 'ICON',
 			setPoint = { 'RIGHT', UIParent, 'CENTER', -150, 50 },
 
-			-- Fear
---			{ spellID = 5782, size = 40, unitId = 'target', caster = 'all', filter = 'DEBUFF' },
-			-- Banish
---			{ spellID = 710, size = 40, unitId = 'target', caster = 'all', filter = 'DEBUFF' },
 			-- Haunt
 			{ spellID = 48181, size = 40, unitId = 'target', caster = 'player', filter = 'DEBUFF' },
 			-- Immolate
@@ -527,12 +523,6 @@ addon.SpellList = {
 			{ spellID = 18223, size = 40, unitId = 'target', caster = 'all', filter = 'DEBUFF' },
 			-- Curse of Weakness
 			{ spellID = 702, size = 40, unitId = 'target', caster = 'all', filter = 'DEBUFF' },
-			-- Seed of Corruption
---			{ spellID = 27243, size = 40, unitId = 'target', caster = 'player', filter = 'DEBUFF' },
-			-- Howl of Terror
---			{ spellID = 5484, size = 40, unitId = 'target', caster = 'player', filter = 'DEBUFF' },
-			-- Death Coil
---			{ spellID = 6789, size = 40, unitId = 'target', caster = 'player', filter = 'DEBUFF' },
 		},
 	},
 	['ROGUE'] = {
@@ -662,7 +652,7 @@ addon.SpellList = {
 			setPoint = { 'RIGHT', UIParent, 'CENTER', -200, -83 },
 
 				-- Death Knight
-				
+
 			-- Gnaw (Ghoul)
 			{ spellID = 47481, size = 64, unitId = 'player', caster = 'all', filter = 'DEBUFF' },
 			-- Strangulate
@@ -674,10 +664,10 @@ addon.SpellList = {
 			-- Chilblains
 			{ spellID = 50041, size = 64, unitId = 'player', caster = 'all', filter = 'DEBUFF' },
 			-- Hungering Cold
-			{ spellID = 51209, size = 64, unitId = 'player', caster = 'all', filter = 'DEBUFF' },
+			{ spellID = 49206, size = 64, unitId = 'player', caster = 'all', filter = 'DEBUFF' },
 
 				-- Druid
-				
+
 			-- Cyclone
 			{ spellID = 33786, size = 64, unitId = 'player', caster = 'all', filter = 'DEBUFF' },
 			-- Hibernate
@@ -696,7 +686,7 @@ addon.SpellList = {
 			{ spellID = 58179, size = 64, unitId = 'player', caster = 'all', filter = 'DEBUFF' },
 
 				-- Hunter
-			
+
 			-- Freezing Trap Effect
 			{ spellID = 3355, size = 64, unitId = 'player', caster = 'all', filter = 'DEBUFF' },
 			-- Scatter Shot
@@ -731,10 +721,6 @@ addon.SpellList = {
 			{ spellID = 54706, size = 64, unitId = 'player', caster = 'all', filter = 'DEBUFF' },
 			-- Web (Spider)
 			{ spellID = 4167, size = 64, unitId = 'player', caster = 'all', filter = 'DEBUFF' },
-			-- Froststorm Breath (Chimera)
-			{ spellID = 51209, size = 64, unitId = 'player', caster = 'all', filter = 'DEBUFF' },
-			-- Tendon Rip (Hyena)
-			{ spellID = 51209, size = 64, unitId = 'player', caster = 'all', filter = 'DEBUFF' },
 
 				-- Mage
 			
@@ -880,6 +866,7 @@ addon.SpellList = {
 			-- War Stomp
 			{ spellID = 20549, size = 64, unitId = 'player', caster = 'all', filter = 'DEBUFF' },
 		},
+		--[[
 		{
 			Name = 'PVP_T_BUFF_ICON',
 			Direction = 'RIGHT',
@@ -914,5 +901,6 @@ addon.SpellList = {
 			-- Grounding Totem Effect
 			{ spellID = 8178, size = 64, unitId = 'target', caster = 'all', filter = 'BUFF' },
 		},
+		]]--
 	},
 }
