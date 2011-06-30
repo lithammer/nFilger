@@ -868,7 +868,7 @@ addon.SpellList = {
 			-- War Stomp
 			{ spellID = 20549, size = 64, unitId = 'player', caster = 'all', filter = 'DEBUFF' },
 		},
-		--[[
+
 		{
 			Name = 'PVP_T_BUFF_ICON',
 			Direction = 'RIGHT',
@@ -903,6 +903,5 @@ addon.SpellList = {
 			-- Grounding Totem Effect
 			{ spellID = 8178, size = 64, unitId = 'target', caster = 'all', filter = 'BUFF' },
 		},
-		]]--
 	},
 }
