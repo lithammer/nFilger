@@ -1,8 +1,8 @@
 --[[
 
-	Filger
-	Copyright (c) 2009, Nils Ruesch
-	All rights reserved.
+Filger
+Copyright (c) 2009, Nils Ruesch
+All rights reserved.
 
 ]]
 
@@ -17,9 +17,9 @@ local class = select(2, UnitClass('player'))
 local classcolor = RAID_CLASS_COLORS[class]
 local active, bars = {}, {}
 local MyUnits = {
-    player = true,
-    vehicle = true,
-    pet = true,
+	player = true,
+	vehicle = true,
+	pet = true,
 }
 
 local Update
@@ -98,6 +98,7 @@ function Update(self)
                 if not bar:HasBeautyBorder() then
 					bar:CreateBeautyBorder(12)
                 end
+
 				bar.cooldown = CreateFrame('Cooldown', '$parentCD', bar, 'CooldownFrameTemplate')
 				bar.cooldown:SetAllPoints(bar.icon)
 				bar.cooldown:SetReverse()
@@ -179,7 +180,7 @@ function Update(self)
 			tinsert(bars[id], bar)
 		end
 
-        bar.spellName = value.data.spellName
+		bar.spellName = value.data.spellName
 
 		bar.icon:SetTexture(value.icon)
 		bar.count:SetText(value.count > 1 and value.count or '')
@@ -227,7 +228,7 @@ local function OnEvent(self, event, ...)
 		local id = self.Id
 
 		for i = 1, #SpellList[class][id], 1 do
-		    local name, rank, icon, count, debuffType, duration, expirationTime, caster, isStealable, start, enabled, slotLink, spn
+			local name, rank, icon, count, debuffType, duration, expirationTime, caster, isStealable, start, enabled, slotLink, spn
 			local data = SpellList[class][id][i]
 
 			if (data.filter == 'BUFF') then
@@ -253,7 +254,7 @@ local function OnEvent(self, event, ...)
 					if (slotLink) then
 						name, _, _, _, _, _, _, _, _, icon = GetItemInfo(slotLink)
 
-                        data.spellName = name
+						data.spellName = name
 						start, duration, enabled = GetInventoryItemCooldown('player', data.slotID)
 					end
 				end
@@ -262,9 +263,9 @@ local function OnEvent(self, event, ...)
 				caster = 'all'
 			end
 
-            if (not data.spellName) then
-                data.spellName = spn
-            end
+			if (not data.spellName) then
+				data.spellName = spn
+			end
 
 			if (not active[id]) then
 				active[id] = {}
