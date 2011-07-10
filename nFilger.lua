@@ -95,9 +95,9 @@ function Update(self)
 			end
 
 			if (self.Mode == 'ICON') then
-                if not bar:HasBeautyBorder() then
+				if not bar:HasBeautyBorder() then
 					bar:CreateBeautyBorder(12)
-                end
+				end
 
 				bar.cooldown = CreateFrame('Cooldown', '$parentCD', bar, 'CooldownFrameTemplate')
 				bar.cooldown:SetAllPoints(bar.icon)
