@@ -95,9 +95,8 @@ function Update(self)
 			end
 
 			if (self.Mode == 'ICON') then
-                if not bar.hasBorder then
-                    CreateBorder(bar, 12, 1, 1, 1)
-                    bar.hasBorder = true
+                if not bar:HasBeautyBorder() then
+					bar:CreateBeautyBorder(12)
                 end
 				bar.cooldown = CreateFrame('Cooldown', '$parentCD', bar, 'CooldownFrameTemplate')
 				bar.cooldown:SetAllPoints(bar.icon)
@@ -233,19 +232,25 @@ local function OnEvent(self, event, ...)
 
 			if (data.filter == 'BUFF') then
 				spn = GetSpellInfo(data.spellID)
-				name, rank, icon, count, debuffType, duration, expirationTime, caster, isStealable = UnitBuff(data.unitId, spn)
+				if (spn) then
+					name, rank, icon, count, debuffType, duration, expirationTime, caster, isStealable = UnitBuff(data.unitId, spn)
+				end
 			elseif (data.filter == 'DEBUFF') then
 				spn = GetSpellInfo(data.spellID)
-				name, rank, icon, count, debuffType, duration, expirationTime, caster, isStealable = UnitDebuff(data.unitId, spn)
+				if (spn) then
+					name, rank, icon, count, debuffType, duration, expirationTime, caster, isStealable = UnitDebuff(data.unitId, spn)
+				end
 			else
 				if (data.spellID) then
 					spn = GetSpellInfo(data.spellID)
-					start, duration, enabled = GetSpellCooldown(spn)
-					_, _, icon = GetSpellInfo(data.spellID)
+					if (spn) then
+						start, duration, enabled = GetSpellCooldown(spn)
+						_, _, icon = GetSpellInfo(data.spellID)
+					end
 				else
 					slotLink = GetInventoryItemLink('player', data.slotID)
 
-					if ( slotLink ) then
+					if (slotLink) then
 						name, _, _, _, _, _, _, _, _, icon = GetItemInfo(slotLink)
 
                         data.spellName = name
@@ -272,7 +277,7 @@ local function OnEvent(self, event, ...)
 				end
 			end
 
-			if ( ( name and ( data.caster ~= 1 and ( caster == data.caster or data.caster == 'all' ) or MyUnits[caster] )) or ( ( enabled or 0 ) > 0 and ( duration or 0 ) > 1.5 ) ) then
+			if (( name and ( data.caster ~= 1 and ( caster == data.caster or data.caster == 'all' ) or MyUnits[caster] )) or ((enabled or 0) > 0 and (duration or 0 ) > 1.5 )) then
 				table.insert(active[id], { data = data, icon = icon, count = count, duration = duration, expirationTime = expirationTime or start })
 			end
 		end
