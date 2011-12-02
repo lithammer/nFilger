@@ -95,7 +95,7 @@ function Update(self)
 			end
 
 			if (self.Mode == 'ICON') then
-				if not bar:HasBeautyBorder() then
+				if not bar.beautyBorder then
 					bar:CreateBeautyBorder(12)
 				end
 
