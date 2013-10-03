@@ -222,69 +222,60 @@ function Update(self)
 end
 
 local function OnEvent(self, event, ...)
-	local unit = ...
+	local id = self.Id
 
-	if ((unit == 'target' or unit == 'player' or unit == 'pet' or unit == 'focus' ) or event == 'PLAYER_TARGET_CHANGED' or event == 'PLAYER_ENTERING_WORLD' or event == 'SPELL_UPDATE_COOLDOWN') then
-		local id = self.Id
+	for i = 1, #SpellList[class][id], 1 do
+		local name, rank, icon, count, debuffType, duration, expirationTime, caster, isStealable, start, enabled, slotLink, spn
+		local data = SpellList[class][id][i]
 
-		for i = 1, #SpellList[class][id], 1 do
-			local name, rank, icon, count, debuffType, duration, expirationTime, caster, isStealable, start, enabled, slotLink, spn
-			local data = SpellList[class][id][i]
-
-			if (data.filter == 'BUFF') then
+		if (data.filter == 'BUFF' or data.filter == 'DEBUFF') then
+			spn = GetSpellInfo(data.spellID)
+			if (spn) then
+				name, rank, icon, count, debuffType, duration, expirationTime, caster, isStealable = UnitAura(data.unitId, spn, nil, data.filter == 'BUFF' and 'HELPFUL' or 'HARMFUL')
+			end
+		else
+			if (data.spellID) then
 				spn = GetSpellInfo(data.spellID)
 				if (spn) then
-					name, rank, icon, count, debuffType, duration, expirationTime, caster, isStealable = UnitBuff(data.unitId, spn)
-				end
-			elseif (data.filter == 'DEBUFF') then
-				spn = GetSpellInfo(data.spellID)
-				if (spn) then
-					name, rank, icon, count, debuffType, duration, expirationTime, caster, isStealable = UnitDebuff(data.unitId, spn)
+					start, duration, enabled = GetSpellCooldown(spn)
+					_, _, icon = GetSpellInfo(data.spellID)
 				end
 			else
-				if (data.spellID) then
-					spn = GetSpellInfo(data.spellID)
-					if (spn) then
-						start, duration, enabled = GetSpellCooldown(spn)
-						_, _, icon = GetSpellInfo(data.spellID)
-					end
-				else
-					slotLink = GetInventoryItemLink('player', data.slotID)
+				slotLink = GetInventoryItemLink('player', data.slotID)
 
-					if (slotLink) then
-						name, _, _, _, _, _, _, _, _, icon = GetItemInfo(slotLink)
+				if (slotLink) then
+					name, _, _, _, _, _, _, _, _, icon = GetItemInfo(slotLink)
 
-						data.spellName = name
-						start, duration, enabled = GetInventoryItemCooldown('player', data.slotID)
-					end
-				end
-
-				count = 0
-				caster = 'all'
-			end
-
-			if (not data.spellName) then
-				data.spellName = spn
-			end
-
-			if (not active[id]) then
-				active[id] = {}
-			end
-
-			for index, value in ipairs(active[id]) do
-				if (data.spellName == value.data.spellName) then
-					tremove(active[id], index)
-					break
+					data.spellName = name
+					start, duration, enabled = GetInventoryItemCooldown('player', data.slotID)
 				end
 			end
 
-			if (( name and ( data.caster ~= 1 and ( caster == data.caster or data.caster == 'all' ) or MyUnits[caster] )) or ((enabled or 0) > 0 and (duration or 0 ) > 1.5 )) then
-				table.insert(active[id], { data = data, icon = icon, count = count, duration = duration, expirationTime = expirationTime or start })
+			count = 0
+			caster = 'all'
+		end
+
+		if (not data.spellName) then
+			data.spellName = spn
+		end
+
+		if (not active[id]) then
+			active[id] = {}
+		end
+
+		for index, value in ipairs(active[id]) do
+			if (data.spellName == value.data.spellName) then
+				tremove(active[id], index)
+				break
 			end
 		end
 
-		Update(self)
+		if (( name and ( data.caster ~= 1 and ( caster == data.caster or data.caster == 'all' ) or MyUnits[caster] )) or ((enabled or 0) > 0 and (duration or 0 ) > 1.5 )) then
+			table.insert(active[id], { data = data, icon = icon, count = count, duration = duration, expirationTime = expirationTime or start })
+		end
 	end
+
+	Update(self)
 end
 
 if (SpellList and SpellList['ALL']) then
@@ -351,7 +342,7 @@ if (SpellList and SpellList[class]) then
 				end
 			end
 
-			frame:RegisterEvent('UNIT_AURA')
+			frame:RegisterUnitEvent('UNIT_AURA', 'player', 'target', 'vehicle', 'pet', 'focus')
 			frame:RegisterEvent('PLAYER_TARGET_CHANGED')
 			frame:RegisterEvent('PLAYER_ENTERING_WORLD')
 			frame:SetScript('OnEvent', OnEvent)
